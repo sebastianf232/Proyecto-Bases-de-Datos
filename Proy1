@@ -1,0 +1,228 @@
+SELECT "FIRST_NAME", "LAST_NAME", "HEIGHT", "ROSTERSTATUS"
+from "Player_Attributes"
+Where "HEIGHT" Is Not NULL 
+Group by "FIRST_NAME", "LAST_NAME", "HEIGHT", "ROSTERSTATUS"
+ORDER By Max("HEIGHT") ASC
+
+
+
+SELECT "TEAM_NAME_HOME", ((AVG("PTS_HOME") + AVG("PTS_AWAY"))/2) promedio
+FROM "Game" g
+WHERE g."SEASON_ID" >= 22015
+GROUP BY g."TEAM_NAME_HOME"
+Order by promedio desc
+
+SELECT "TEAM_NAME_HOME", 
+
+Select * 
+From "Game"
+Where Extract(YEAR from "Game"."GAME_DATE") >=2015 and Extract(Month from "Game"."GAME_DATE") >10 
+
+select * from information_schema.columns
+
+SELECT DATA_TYPE 
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE 
+     TABLE_NAME   = '"Game"' AND 
+     COLUMN_NAME  = '"GAME_DATE"'
+
+ALTER TABLE "Game"
+ALTER Column "GAME_DATE" TYPE DATE;
+
+select * 
+from "Game" 
+where "GAME_DATE" between '2015-10-27 00:00:00' and '2021-05-16 23:59:00' 
+order by "GAME_DATE" asc;
+
+
+
+SELECT *
+FROM "Game_Officials"
+
+select * 
+from "Game" 
+order by "GAME_DATE" DESC
+
+Select "FIRST_NAME", "LAST_NAME"
+From "Game_Officials"
+Where "GAME_ID" IN(
+	Select COUNT(ga."WL_HOME")
+	FROM "Game" ga 
+	WHERE ga."WL_HOME" = 'W'
+	GROUP BY ga."WL_HOME"
+)
+
+SELECT "FIRST_NAME", "LAST_NAME", COUNT("WL_HOME") Partidos_Ganados_Local
+FROM "Game_Officials" a, "Game" g
+WHERE a."GAME_ID" = g."GAME_ID" and g."WL_HOME" = 'W' 
+GROUP BY a."FIRST_NAME", a."LAST_NAME"
+ORDER BY Partidos_Ganados_Local desc
+LIMIT 5
+
+Select *
+From "Game"
+Order by "SEASON_ID" desc
+
+Select *
+From "Team_Salary"
+
+Select "nameTeam", "X2021-22"
+From "Team_Salary"
+Order by "X2021-22" desc
+
+Select *
+From "Team_Salary"
+
+Select "TEAM_NAME_HOME", ((AVG("") + AVG(""))/2)
+From "Game" g
+WHERE g."SEASON_ID" >= 22015
+
+SELECT "TEAM_NAME_HOME", "PTS_HOME", "TEAM_NAME_AWAY","PTS_AWAY"
+FROM "Game" g
+WHERE g."SEASON_ID" >= 22015
+
+SELECT "TEAM_NAME_HOME", e."PTS_HOME", e."PTS_AWAY"
+FROM "Game" g inner JOIN 
+
+Drop table Pregunta2
+
+CREATE TABLE Pregunta2 As
+SELECT "TEAM_NAME_HOME", AVG("PTS_HOME") pts
+FROM "Game" g
+WHERE g."SEASON_ID" = 22020
+GROUP BY "TEAM_NAME_HOME"
+UNION
+SELECT "TEAM_NAME_AWAY", AVG("PTS_AWAY") pts
+FROM "Game" g
+WHERE g."SEASON_ID" = 22020
+GROUP BY "TEAM_NAME_AWAY"
+
+SELECT "TEAM_NAME_HOME", CAST(AVG(pts) As Decimal(10,2)) promedio_anotados
+From Pregunta2
+GROUP BY "TEAM_NAME_HOME"
+Order by promedio_anotados desc
+
+Drop table Pregunta22
+CREATE TABLE Pregunta22 As
+SELECT "TEAM_NAME_HOME", AVG("PTS_AWAY") pts
+FROM "Game" g
+WHERE g."SEASON_ID" = 22020
+GROUP BY "TEAM_NAME_HOME"
+UNION
+SELECT "TEAM_NAME_AWAY", AVG("PTS_HOME") pts
+FROM "Game" g
+WHERE g."SEASON_ID" = 22020
+GROUP BY "TEAM_NAME_AWAY"
+
+SELECT "TEAM_NAME_HOME", CAST(AVG(pts) As Decimal(10,2)) recibidos
+From Pregunta22
+GROUP BY "TEAM_NAME_HOME"
+Order by recibidos desc
+
+Select * From "Game"
+Order by "SEASON_ID" desc
+
+Select * From "Draft"
+
+Select * From "Player_Salary"
+
+Select "NICKNAME",  "ARENACAPACITY"
+From "Team_Attributes"
+WHERE "ARENACAPACITY" Is NOT NULL
+GROUP BY "NICKNAME",  "ARENACAPACITY"
+Order by "ARENACAPACITY" desc
+
+Select *
+From "Game"
+
+CREATE TABLE threes As
+SELECT "TEAM_NAME_HOME", AVG("PTS_HOME") pts
+FROM "Game" g
+WHERE g."SEASON_ID" = 22020
+GROUP BY "TEAM_NAME_HOME"
+UNION
+SELECT "TEAM_NAME_AWAY", AVG("PTS_AWAY") pts
+FROM "Game" g
+WHERE g."SEASON_ID" = 22020
+GROUP BY "TEAM_NAME_AWAY"
+
+Select "TEAM_NAME_HOME","SEASON_ID", Cast(AVG("FG3_PCT_HOME") as Decimal(10,3)) threes
+From "Game" g
+Where "FG3_PCT_HOME" is not null and g."SEASON_ID" = 22020
+Group By "TEAM_NAME_HOME", "SEASON_ID"
+Order by threes desc
+
+Select "TEAM_NAME_AWAY","SEASON_ID", Cast(AVG("FG3_PCT_AWAY") as Decimal(10,3)) threes
+From "Game" g
+Where "FG3_PCT_AWAY" is not null and g."SEASON_ID" = 22020
+Group By "TEAM_NAME_AWAY", "SEASON_ID"
+Order by threes desc
+
+Select "TEAM_NAME_HOME","SEASON_ID", Cast(AVG("FT_PCT_HOME") as Decimal(10,3)) Free_Throws
+From "Game" g
+Where "FT_PCT_HOME" is not null and g."SEASON_ID" = 22020
+Group By "TEAM_NAME_HOME", "SEASON_ID"
+Order by Free_Throws desc
+
+Select "TEAM_NAME_AWAY","SEASON_ID", Cast(AVG("FT_PCT_AWAY") as Decimal(10,3)) Free_Throws
+From "Game" g
+Where "FT_PCT_HOME" is not null and g."SEASON_ID" = 22020
+Group By "TEAM_NAME_AWAY", "SEASON_ID"
+Order by Free_Throws desc
+
+Select "FIRST_NAME", "LAST_NAME", "TEAM_NAME", "PIE"
+From "Player_Attributes"
+Where "ROSTERSTATUS" = 'Active' 
+Group By "FIRST_NAME", "LAST_NAME", "TEAM_NAME", "PIE"
+Order By "PIE" desc
+
+Select * From "Player"
+Where "first_name" = 'Isaiah'
+
+
+Select * from "Game"
+
+CREATE TABLE perdidas As
+SELECT "TEAM_NAME_HOME", AVG("PTS_HOME") pts
+FROM "Game" g
+WHERE g."SEASON_ID" = 22020
+GROUP BY "TEAM_NAME_HOME"
+UNION
+SELECT "TEAM_NAME_AWAY", AVG("PTS_AWAY") pts
+FROM "Game" g
+WHERE g."SEASON_ID" = 22020
+GROUP BY "TEAM_NAME_AWAY"
+
+CREATE TABLE turnovers As
+SELECT "TEAM_NAME_HOME", AVG("TOTAL_TURNOVERS_HOME") pts
+FROM "Game" g
+WHERE g."SEASON_ID" = 22020
+GROUP BY "TEAM_NAME_HOME"
+UNION
+SELECT "TEAM_NAME_AWAY", AVG("TOTAL_TURNOVERS_AWAY") pts
+FROM "Game" g
+WHERE g."SEASON_ID" = 22020
+GROUP BY "TEAM_NAME_AWAY"
+
+SELECT "TEAM_NAME_HOME", CAST(AVG(pts) As Decimal(10,2)) turnovers
+From turnovers
+GROUP BY "TEAM_NAME_HOME"
+Order by turnovers asc
+
+SELECT "nameTeam", "X2022-23"
+FROM "Team_Salary"
+Group by "nameTeam", "X2022-23"
+Order by "X2022-23" asc
+
+Select "TEAM_NAME_HOME", AVG("PLUS_MINUS_HOME") plusminus
+FROM "Game"
+WHERE "SEASON" = 2020
+Group by "TEAM_NAME_HOME"
+order by plusminus desc
+
+Select "FIRST_NAME", "LAST_NAME", "TEAM_NAME", "PIE", "PTS", "AST", "REB"
+From "Player_Attributes"
+Where "ROSTERSTATUS" = 'Active' 
+Group By "FIRST_NAME", "LAST_NAME", "TEAM_NAME", "PIE", "PTS", "AST", "REB"
+Order By "PIE" desc
+LIMIT 15
